@@ -1,6 +1,10 @@
 # McTools
 Common tool code set
 
+```javascript
+
+## Support method
+
 isInt,
 isIe89,
 isPlainObject,
@@ -29,3 +33,5 @@ getObjectURL,
 getFileExt,
 assign,
 extend
+
+```
