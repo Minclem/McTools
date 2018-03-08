@@ -325,7 +325,7 @@ function getFileExt (obj) {
  * 合并对象
  * @param { Object }  target        目标对象
  * @param { Object }  ...arg     源对象
- * @returns {string}
+ * @returns {Object}
  */
 
 function assign(target) {
@@ -359,6 +359,10 @@ function assign(target) {
  */
 
 function extend (target, source, deep) {
+    if (target == null) {
+        throw new TypeError('Cannot convert undefined or null to object');
+    }
+    
     for (var key in source) {
         if (deep && isPlainObject(source[key]) || isArray(source[key])) {
             if (isPlainObject(source[key]) && !isPlainObject(target[key])) target[key] = {}
@@ -369,6 +373,7 @@ function extend (target, source, deep) {
             target[key] = source[key]
         }
     }
+    return target
 }
 
 
