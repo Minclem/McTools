@@ -362,7 +362,7 @@ function extend (target, source, deep) {
     if (target == null) {
         throw new TypeError('Cannot convert undefined or null to object');
     }
-    
+    target = Object(target);
     for (var key in source) {
         if (deep && isPlainObject(source[key]) || isArray(source[key])) {
             if (isPlainObject(source[key]) && !isPlainObject(target[key])) target[key] = {}
