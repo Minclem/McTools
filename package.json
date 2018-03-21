@@ -1,6 +1,6 @@
 {
   "name": "mctools",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Common tool code set",
   "main": "src/index.js",
   "scripts": {
