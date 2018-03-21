@@ -1,4 +1,54 @@
 /**
+ * 获取数据类型
+ *
+ * @param  { Mixed }   obj
+ * @return { String }  dataType
+ */
+
+
+function getType (obj) {
+    let dataType = Object.prototype.toString.call(obj)
+
+    return dataType.substring(8, dataType.length - 1)
+}
+
+/**
+ * 清理模块的空间
+ *
+ * @param  { Mixed }   obj
+ * @return { String }  dataType
+ */
+
+function cleanSpaceModel (obj) {
+    let _type = getType(obj)
+
+    if (_type === 'String') {
+        return obj.replace(/\n|\r|\s/g, '')
+    }
+
+    if (_type === 'Object') {
+        for (var key in obj) {
+            obj[key] = cleanSpaceModel(obj[key])
+        }
+        return obj
+    }
+
+    if (_type === 'Array') {
+        for (var i = obj.length - 1; i >= 0; i--) {
+            obj[i] = cleanSpaceModel(obj[i])
+        }
+
+        return obj
+    }
+
+    if (_type === 'Null' || _type === 'Undefined') {
+        return ''
+    }
+
+    return obj
+}
+
+/**
  * 是否为ie8/9
  * @returns {boolean}
  */
@@ -36,7 +86,7 @@ function isPlainObject (obj) {
  */
 
 function isArray (obj) {
-    return Array.isArray ? Array.isArray(obj) : Object.prototype.toString.call(obj) === '[object Array]'
+    return Array.isArray ? Array.isArray(obj) : getType(obj) === 'Array'
 }
 
 /**
@@ -205,8 +255,10 @@ function isIdCard (str) {
 function strRepeat (str, n) {
     if (!str) return ''
     if (!isNumber(n) || n <= 1) return str
+    
     let _str = ''
     for (var i = n - 1; i >= 0; i--) _str += str
+    
     return _str
 }
 
@@ -322,8 +374,8 @@ function getFileExt (obj) {
 }
 
 /**
- * 合并对象
- * @param { Object }  target        目标对象
+ * 归并对象
+ * @param { Object }  target     目标对象
  * @param { Object }  ...arg     源对象
  * @returns {Object}
  */
@@ -351,7 +403,7 @@ function assign(target) {
 }
 
 /**
- * 合并对象
+ * 扩展对象
  * @param { Object }  target     目标对象
  * @param { Object }  source     源对象
  * @param { boolean } deep       深拷贝
@@ -378,6 +430,8 @@ function extend (target, source, deep) {
 
 
 export default {
+    getType,
+    cleanSpaceModel,
     isInt,
     isIe89,
     isPlainObject,
