@@ -5,8 +5,9 @@ Common tool code set
 
 ## Support method
 
+- 数据/环境检测
+
 getType                 获取数据类型
-cleanSpaceModel         清理模块的空间
 isIe89                  是否为ie8/9
 isInt                   是否为整数(字符串数值亦可)
 isPlainObject           是否一般对象
@@ -26,16 +27,27 @@ isChinese               是否中文
 isEnglish               是否英文
 isPassport              是否为护照
 isIdCard                是否为身份证
-strRepeat               重复数据
+
+- 数据处理
+
+strRepeat(str, n)       重复数据
 encodePhone             手机号加密
 clone                   克隆
 formatNum               数值格式化
-formatDate              日期格式化
-getObjectURL            获取文件路径
-getFileExt              获取文件拓展名
+formatDate(date,format) 日期格式化
+getObjectURL(file)      获取文件路径
+getFileExt(file)        获取文件拓展名
 assign                  归并对象
 extend                  扩展对象
-CanvasResize            图片压缩
+CanvasResize(options)   图片压缩
+	options = {
+        url,            图片路径
+        rate,           缩放比例(可选， 默认值 0.5)
+        width,          指定缩放宽度(可选，默认为空)
+        height,         指定缩放高度(可选，默认为空)
+        type,           设置图片类型(默认png)
+        success         压缩完成后的回调返回压缩后的图片(base64)
+    }
 
 ```
 

@@ -15,8 +15,8 @@ function getType (obj) {
 /**
  * 清理模块的空间
  *
- * @param  { Mixed }   obj
- * @return { String }  dataType
+ * @param  { Mixed }
+ * @return { Mixed }    
  */
 
 function cleanSpaceModel (obj) {
@@ -436,7 +436,7 @@ function extend (target, source, deep) {
 function CanvasResize (options) {
     var opts = {
         url: '',
-        rate: 1,
+        rate: .5,
         width: null,
         height: null,
         type: null,
@@ -457,9 +457,15 @@ function CanvasResize (options) {
             rate = opts.rate || 1,
             dataUrl;
 
-        canvas.width = w * rate;
-        canvas.height = h * rate;
-        ctx.drawImage(img, 0, 0, w, h, 0, 0, w * rate, h * rate);
+        if (opts.width && opts.height) {
+            canvas.width = opts.width;
+            canvas.height = opts.height;
+        } else {
+            canvas.width = w * rate;
+            canvas.height = h * rate;
+        }
+
+        ctx.drawImage(img, 0, 0, w, h, 0, 0, canvas.width, canvas.height);
         dataUrl = canvas.toDataURL(opts.type);
         typeof opts.success === 'function' && opts.success(dataUrl);
     }
