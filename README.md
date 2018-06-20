@@ -35,7 +35,7 @@ getObjectURL            获取文件路径
 getFileExt              获取文件拓展名
 assign                  归并对象
 extend                  扩展对象
-CanvasResize            图像压缩
+CanvasResize            图片压缩
 
 ```
 

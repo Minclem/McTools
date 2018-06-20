@@ -428,13 +428,19 @@ function extend (target, source, deep) {
     return target
 }
 
+/**
+ * 图片压缩
+ * @param { Object }  options    压缩配置
+ */
+
 function CanvasResize (options) {
     var opts = {
         url: '',
         rate: 1,
         width: null,
         height: null,
-        type: null
+        type: null,
+        success: null
     }
 
     Object.assign(opts, options)
