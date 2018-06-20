@@ -315,6 +315,15 @@ function formatNum (n) {
 function formatDate (date, format) {
     // 服务端返回的时间戳可能以秒的形式
     if (date == null) return
+
+    // 格式化可能存在的格式
+    // [2018/06/19 15:40] [2018-06-19 15:40] [2018年06月19日 15:40]
+    if (isNaN(date) && date.length >= 8) {
+        let dataArr = date.replace(/年|月|\//g, '-').replace(/日/g, '').split(/-|\s|:/g)
+        if (dataArr.length >= 3) {
+            date = new Date(dataArr[0], dataArr[1] - 1 || 0, dataArr[2] || 1, dataArr[3] || null, dataArr[4] || null, dataArr[5] || null).getTime()
+        }
+    }
     date = parseInt(date.toString().length < 11 ? date * 1000 : date)
 
     date = new Date(date)
