@@ -428,6 +428,37 @@ function extend (target, source, deep) {
     return target
 }
 
+function CanvasResize (options) {
+    var opts = {
+        url: '',
+        rate: 1,
+        width: null,
+        height: null,
+        type: null
+    }
+
+    Object.assign(opts, options)
+
+    var img = new Image();
+    img.src = opts.url;
+    img.crossOrigin = 'anonymous'; // 跨域处理
+
+    img.onload = function () {
+        var canvas = document.createElement('canvas'),
+            ctx    = canvas.getContext('2d'),
+            w = this.width,
+            h = this.height,
+            rate = opts.rate || 1,
+            dataUrl;
+
+        canvas.width = w * rate;
+        canvas.height = h * rate;
+        ctx.drawImage(img, 0, 0, w, h, 0, 0, w * rate, h * rate);
+        dataUrl = canvas.toDataURL(opts.type);
+        typeof opts.success === 'function' && opts.success(dataUrl);
+    }
+}
+
 
 export default {
     getType,
@@ -459,5 +490,6 @@ export default {
     getObjectURL,
     getFileExt,
     assign,
-    extend
+    extend,
+    CanvasResize
 }

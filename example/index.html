@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CanvasResize</title>
+</head>
+<body>
+    <script src="../dist/McTools.min.js"></script>
+    <script>
+        console.log(McTools.CanvasResize({
+            rate: .5,
+            url: 'http://h.hiphotos.baidu.com/image/h%3D300/sign=a9f37a64f11f4134ff37037e151d95c1/c995d143ad4bd1137c1d50b556afa40f4afb0560.jpg',
+            success: function (url) {
+                var img = new Image()
+                img.src = url
+                document.body.appendChild(img)
+            }
+        }))
+    </script>
+</body>
+</html>
