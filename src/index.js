@@ -308,7 +308,11 @@ function formatNum (n) {
  * 日期格式化
  *
  * @param   { Number, Date Object } date 时间对象 或者 时间戳
- * @param   { String } format 返回的格式 time: 时间, date：日期, 默认全部显示
+ * @param   { String } format 返回的格式
+ *      time: 时间
+ *      date：日期, 默认全部显示
+ *      line: 时间线
+ *      part: 间隔线
  * @returns { String }  返回格式后的时间字符串
  */
 
@@ -345,6 +349,40 @@ function formatDate (date, format) {
         return h + ':' + m + ':' + s
     } else if (format === 'date') {
         return y + '-' + M + '-' + d
+    } else if (format === 'line' || format === 'part') {
+        let time = Math.floor((new Date() - date) / 1000)
+
+        if (time < 60) {
+            return '刚刚'
+        }
+
+        if (time < 3600) {
+            return Math.floor(time / 60) + '分钟前'
+        }
+
+        if (time < 86400) {
+            return Math.floor(time / 3600) + '小时前'
+        }
+        
+        if (format === 'line') {
+            if (time < 31536000) {
+                return M + '月' + d + '日'
+            }
+
+            return y + '年' + M + '月' + d + '日'
+        }
+            
+        if (format === 'part') {
+            if (time < 2592000) {
+                return Math.floor(time / 86400) + '天前'
+            }
+
+            if (time < 31536000) {
+                return Math.floor(time / 2592000) + '个月前'
+            }
+
+            return Math.floor(time / 31536000) + '年前'
+        }
     } else {
         return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s
     }

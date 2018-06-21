@@ -7,9 +7,31 @@
 <body>
     <script src="../dist/McTools.min.js"></script>
     <script>
-        var p = document.createElement('p')
-        p.innerHTML = McTools.formatDate('2018年06月19日 15:40')
-        document.body.appendChild(p)
+        var p1 = document.createElement('p')
+        var p2 = document.createElement('p')
+        var p3 = document.createElement('p')
+        var p4 = document.createElement('p')
+
+        p1.innerHTML = McTools.formatDate('2018年06月19日 15:40')
+        p2.innerHTML = McTools.formatDate('2018年06月19日 15:40', 'time')
+
+        //  Line
+        p3.innerHTML = McTools.formatDate('2018年06月19日 15:40', 'line')
+                     + '<br />'
+                     + McTools.formatDate(+new Date(), 'line')
+                     + '<br />'
+                     + McTools.formatDate(new Date() - 11536000000, 'line')
+
+        p4.innerHTML = McTools.formatDate('2018年06月19日 15:40', 'part')
+                     + '<br />'
+                     + McTools.formatDate(+new Date(), 'part')
+                     + '<br />'
+                     + McTools.formatDate(new Date() - 11536000000, 'part')
+
+        document.body.appendChild(p1)
+        document.body.appendChild(p2)
+        document.body.appendChild(p3)
+        document.body.appendChild(p4)
     </script>
 </body>
 </html>
