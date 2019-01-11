@@ -7,9 +7,9 @@
 
 
 function getType (obj) {
-    let dataType = Object.prototype.toString.call(obj)
+    const dataType = Object.prototype.toString.call(obj);
 
-    return dataType.substring(8, dataType.length - 1)
+    return dataType.substring(8, dataType.length - 1);
 }
 
 /**
@@ -20,32 +20,33 @@ function getType (obj) {
  */
 
 function cleanSpaceModel (obj) {
-    let _type = getType(obj)
+    const _type = getType(obj);
 
     if (_type === 'String') {
-        return obj.replace(/\n|\r|\s/g, '')
+        return obj.replace(/\n|\r|\s/g, '');
     }
 
     if (_type === 'Object') {
         for (var key in obj) {
-            obj[key] = cleanSpaceModel(obj[key])
+            obj[key] = cleanSpaceModel(obj[key]);
         }
-        return obj
+
+        return obj;
     }
 
     if (_type === 'Array') {
         for (var i = obj.length - 1; i >= 0; i--) {
-            obj[i] = cleanSpaceModel(obj[i])
+            obj[i] = cleanSpaceModel(obj[i]);
         }
 
-        return obj
+        return obj;
     }
 
     if (_type === 'Null' || _type === 'Undefined') {
-        return ''
+        return '';
     }
 
-    return obj
+    return obj;
 }
 
 /**
@@ -54,7 +55,7 @@ function cleanSpaceModel (obj) {
  */
 
 function isIe89 () {
-    return /MSIE (8|9)\.0/.test(navigator.userAgent)
+    return /MSIE (8|9)\.0/.test(navigator.userAgent);
 }
 
 /**
@@ -64,7 +65,7 @@ function isIe89 () {
  */
 
 function isInt (n) {
-    return /^[0-9]+$/.test(n)
+    return /^[0-9]+$/.test(n);
 }
 
 /**
@@ -75,7 +76,9 @@ function isInt (n) {
  */
 
 function isPlainObject (obj) {
-    return isObj(obj) && !(obj !== null && obj === obj.window) && Object.getPrototypeOf(obj) === Object.prototype
+    return isObj(obj) &&
+            !(obj !== null && obj === obj.window) &&
+            Object.getPrototypeOf(obj) === Object.prototype;
 }
 
 /**
@@ -86,7 +89,7 @@ function isPlainObject (obj) {
  */
 
 function isArray (obj) {
-    return Array.isArray ? Array.isArray(obj) : getType(obj) === 'Array'
+    return Array.isArray ? Array.isArray(obj) : getType(obj) === 'Array';
 }
 
 /**
@@ -97,7 +100,7 @@ function isArray (obj) {
  */
 
 function isUndefined (o) {
-    return o === void 0
+    return o === void 0;
 }
 
 /**
@@ -108,7 +111,7 @@ function isUndefined (o) {
  */
 
 function isNumber (n) {
-    return parseInt(n) === parseInt(n) && -n === -n
+    return parseInt(n) === parseInt(n) && -n === -n;
 }
 
 /**
@@ -120,7 +123,7 @@ function isNumber (n) {
  */
 
 function isDiff (a, b) {
-    return typeof a === typeof b ? JSON.stringify(a) !== JSON.stringify(b) : false
+    return typeof a === typeof b ? JSON.stringify(a) !== JSON.stringify(b) : false;
 }
 
 /**
@@ -131,7 +134,7 @@ function isDiff (a, b) {
  */
 
 function isFn (fn) {
-    return typeof fn === 'function'
+    return typeof fn === 'function';
 }
 
 /**
@@ -142,7 +145,7 @@ function isFn (fn) {
  */
 
 function isObj (obj) {
-    return obj && typeof obj === 'object' ? true : false
+    return obj && typeof obj === 'object' ? true : false;
 }
 
 /**
@@ -153,7 +156,7 @@ function isObj (obj) {
  */
 
 function isStr (str) {
-    return typeof str === 'string'
+    return typeof str === 'string';
 }
 
 /**
@@ -163,7 +166,7 @@ function isStr (str) {
  * @return { Boolean }  bool
  */
 function isEmail (str) {
-    return /^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,3}[a-z]{2,4}$/.test(str)
+    return /^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,3}[a-z]{2,4}$/.test(str);
 }
 
 /**
@@ -173,7 +176,7 @@ function isEmail (str) {
  */
 
 function isUrl (str) {
-    return /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&amp;:/~+#]*[\w\-@?^=%&amp;/~+#])?$/.test(str)
+    return /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&amp;:/~+#]*[\w\-@?^=%&amp;/~+#])?$/.test(str);
 }
 
 /**
@@ -183,7 +186,7 @@ function isUrl (str) {
  */
 
 function isPhone (str) {
-    return /^1\d{10}$/.test(str)
+    return /^1\d{10}$/.test(str);
 }
 
 /**
@@ -193,7 +196,7 @@ function isPhone (str) {
  */
 
 function isIOS () {
-    return (/iPhone|iPad|iPod/).test(navigator.userAgent)
+    return (/iPhone|iPad|iPod/).test(navigator.userAgent);
 }
 
 /**
@@ -203,7 +206,7 @@ function isIOS () {
  */
 
 function isAndroid () {
-    return (/Android/).test(navigator.userAgent)
+    return (/Android/).test(navigator.userAgent);
 }
 
 /**
@@ -213,7 +216,7 @@ function isAndroid () {
  */
 
 function isChinese (str) {
-    return /^[\u4e00-\u9fa5·]+$/.test(str)
+    return /^[\u4e00-\u9fa5·]+$/.test(str);
 }
 
 /**
@@ -223,7 +226,7 @@ function isChinese (str) {
  */
 
 function isEnglish (str) {
-    return /^[a-zA-Z\\s]+/.test(str)
+    return /^[a-zA-Z\\s]+/.test(str);
 }
 
 /**
@@ -233,7 +236,7 @@ function isEnglish (str) {
  */
 
 function isPassport (str) {
-    return /^[a-zA-Z0-9]{5,17}$/.test(str)
+    return /^[a-zA-Z0-9]{5,17}$/.test(str);
 }
 
 /**
@@ -243,7 +246,7 @@ function isPassport (str) {
  */
 
 function isIdCard (str) {
-    return /(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(str)
+    return /(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(str);
 }
 
 /**
@@ -253,13 +256,21 @@ function isIdCard (str) {
  */
 
 function strRepeat (str, n) {
-    if (!str) return ''
-    if (!isNumber(n) || n <= 1) return str
+    if (!str) {
+        return '';
+    }
+
+    if (!isNumber(n) || n <= 1) {
+        return str;
+    }
     
-    let _str = ''
-    for (var i = n - 1; i >= 0; i--) _str += str
+    let _str = '';
+
+    for (var i = n - 1; i >= 0; i--) {
+        _str += str;
+    }
     
-    return _str
+    return _str;
 }
 
 /**
@@ -271,11 +282,11 @@ function strRepeat (str, n) {
 function encodePhone (phone) {
     if (!phone || isNumber(phone)) {
         return phone.toString().replace(/^(\d{3})(\d{4})(\d{4})/, function ($1, $2, $3, $4) {
-            return [$2, strRepeat('*', $3.length), $4].join('')
-        })
-    } else {
-        return phone || ''
+            return [$2, strRepeat('*', $3.length), $4].join('');
+        });
     }
+
+    return phone || '';
 }
 
 /**
@@ -287,10 +298,10 @@ function encodePhone (phone) {
 
 function clone (obj) {
     if (isObj(obj)) {
-        return JSON.parse(JSON.stringify(obj))
-    } else {
-        return isFn(obj) ? new obj : obj
+        return JSON.parse(JSON.stringify(obj));
     }
+
+    return isFn(obj) ? new obj : obj;
 }
 
 /**
@@ -301,7 +312,7 @@ function clone (obj) {
  */
 
 function formatNum (n) {
-    return n >= 10 ? n : '0' + n
+    return n >= 10 ? n : '0' + n;
 }
 
 /**
@@ -318,74 +329,87 @@ function formatNum (n) {
 
 function formatDate (date, format) {
     // 服务端返回的时间戳可能以秒的形式
-    if (date == null) return
+    if (date == null) return;
 
     // 格式化可能存在的格式
     // [2018/06/19 15:40] [2018-06-19 15:40] [2018年06月19日 15:40]
     if (isNaN(date) && date.length >= 8) {
-        let dataArr = date.replace(/年|月|\//g, '-').replace(/日/g, '').split(/-|\s|:/g)
+        const dataArr = date.replace(/年|月|\//g, '-').replace(/日/g, '').split(/-|\s|:/g);
+
         if (dataArr.length >= 3) {
-            date = new Date(dataArr[0], dataArr[1] - 1 || 0, dataArr[2] || 1, dataArr[3] || null, dataArr[4] || null, dataArr[5] || null).getTime()
+            date = new Date(
+                dataArr[0],
+                dataArr[1] - 1 || 0,
+                dataArr[2] || 1,
+                dataArr[3] || null,
+                dataArr[4] || null,
+                dataArr[5] || null
+            ).getTime();
         }
     }
-    date = parseInt(date.toString().length < 11 ? date * 1000 : date)
 
-    date = new Date(date)
+    date = parseInt(date.toString().length < 11 ? date * 1000 : date);
 
-    let y = date.getFullYear()
-    let M = date.getMonth() + 1
-    let d = date.getDate()
-    let h = date.getHours()
-    let m = date.getMinutes()
-    let s = date.getSeconds()
+    date = new Date(date);
 
-    M = formatNum(M)
-    d = formatNum(d)
-    h = formatNum(h)
-    m = formatNum(m)
-    s = formatNum(s)
+    const y = date.getFullYear();
+    let M = date.getMonth() + 1;
+    let d = date.getDate();
+    let h = date.getHours();
+    let m = date.getMinutes();
+    let s = date.getSeconds();
+
+    M = formatNum(M);
+    d = formatNum(d);
+    h = formatNum(h);
+    m = formatNum(m);
+    s = formatNum(s);
 
     if (format === 'time') {
-        return h + ':' + m + ':' + s
-    } else if (format === 'date') {
-        return y + '-' + M + '-' + d
-    } else if (format === 'line' || format === 'part') {
-        let time = Math.floor((new Date() - date) / 1000)
+        return h + ':' + m + ':' + s;
+    }
+
+    if (format === 'date') {
+        return y + '-' + M + '-' + d;
+    }
+
+    if (format === 'line' || format === 'part') {
+        const time = Math.floor((new Date() - date) / 1000);
 
         if (time < 60) {
-            return '刚刚'
+            return '刚刚';
         }
 
         if (time < 3600) {
-            return Math.floor(time / 60) + '分钟前'
+            return Math.floor(time / 60) + '分钟前';
         }
 
         if (time < 86400) {
-            return Math.floor(time / 3600) + '小时前'
+            return Math.floor(time / 3600) + '小时前';
         }
         
         if (format === 'line') {
             if (time < 31536000) {
-                return M + '月' + d + '日'
+                return M + '月' + d + '日';
             }
 
-            return y + '年' + M + '月' + d + '日'
+            return y + '年' + M + '月' + d + '日';
         }
             
         if (format === 'part') {
             if (time < 2592000) {
-                return Math.floor(time / 86400) + '天前'
+                return Math.floor(time / 86400) + '天前';
             }
 
             if (time < 31536000) {
-                return Math.floor(time / 2592000) + '个月前'
+                return Math.floor(time / 2592000) + '个月前';
             }
 
-            return Math.floor(time / 31536000) + '年前'
+            return Math.floor(time / 31536000) + '年前';
         }
-    } else {
-        return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s
     }
+
+    return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s;
 }
 
 /**
@@ -395,19 +419,22 @@ function formatDate (date, format) {
  */
 
 function getObjectURL (file) {
-    var url = null
-
-    if (window.URL) {
-        url = window.URL.createObjectURL(file)
-    } else if (window.webkitURL) {
-        url = window.webkitURL.createObjectURL(file)
-    } else {
-        file.select()
-        file.blur()
-        url = document.selection.createRange().text
+    if (!file) {
+        return '';
     }
 
-    return url
+    if (window.URL) {
+        return window.URL.createObjectURL(file);
+    }
+
+    if (window.webkitURL) {
+        return window.webkitURL.createObjectURL(file);
+    }
+
+    file.select();
+    file.blur();
+    
+    return document.selection.createRange().text;
 }
 
 /**
@@ -417,7 +444,7 @@ function getObjectURL (file) {
  */
 
 function getFileExt (obj) {
-    return obj.value.substr(obj.value.lastIndexOf('.')).toLowerCase()
+    return obj.value.substr(obj.value.lastIndexOf('.')).toLowerCase();
 }
 
 /**
@@ -432,13 +459,13 @@ function assign(target) {
         throw new TypeError('Cannot convert undefined or null to object');
     }
   
-    var to = Object(target);
+    let to = Object(target);
     
-    for (var i = 1; i < arguments.length; i++) {
-        var nextSource = arguments[i];
+    for (let i = 1; i < arguments.length; i++) {
+        let nextSource = arguments[i];
         
         if (nextSource != null) {
-            for (var nextKey in nextSource) {
+            for (let nextKey in nextSource) {
                 if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
                     to[nextKey] = nextSource[nextKey];
                 }
@@ -461,18 +488,20 @@ function extend (target, source, deep) {
     if (target == null) {
         throw new TypeError('Cannot convert undefined or null to object');
     }
-    target = Object(target);
-    for (var key in source) {
-        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-            if (isPlainObject(source[key]) && !isPlainObject(target[key])) target[key] = {}
-            if (isArray(source[key]) && !isArray(target[key])) target[key] = []
 
-            extend(target[key], source[key], deep)
+    target = Object(target);
+
+    for (let key in source) {
+        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+            if (isPlainObject(source[key]) && !isPlainObject(target[key])) target[key] = {};
+            if (isArray(source[key]) && !isArray(target[key])) target[key] = [];
+
+            extend(target[key], source[key], deep);
         } else if (source[key] !== undefined) {
-            target[key] = source[key]
+            target[key] = source[key];
         }
     }
-    return target
+    return target;
 }
 
 /**
@@ -481,28 +510,29 @@ function extend (target, source, deep) {
  */
 
 function CanvasResize (options) {
-    var opts = {
+    const opts = {
         url: '',
         rate: .5,
         width: null,
         height: null,
         type: null,
         success: null
-    }
+    };
 
-    Object.assign(opts, options)
+    assign(opts, options);
 
-    var img = new Image();
+    const img = new Image();
+
     img.src = opts.url;
     img.crossOrigin = 'anonymous'; // 跨域处理
 
     img.onload = function () {
-        var canvas = document.createElement('canvas'),
-            ctx    = canvas.getContext('2d'),
-            w = this.width,
-            h = this.height,
-            rate = opts.rate || 1,
-            dataUrl;
+        const canvas = document.createElement('canvas');
+        const ctx    = canvas.getContext('2d');
+        const w = this.width;
+        const h = this.height;
+        const rate = opts.rate || 1;
+        let dataUrl = '';
 
         if (opts.width && opts.height) {
             canvas.width = opts.width;
@@ -514,8 +544,9 @@ function CanvasResize (options) {
 
         ctx.drawImage(img, 0, 0, w, h, 0, 0, canvas.width, canvas.height);
         dataUrl = canvas.toDataURL(opts.type);
+
         typeof opts.success === 'function' && opts.success(dataUrl);
-    }
+    };
 }
 
 
@@ -551,4 +582,4 @@ export default {
     assign,
     extend,
     CanvasResize
-}
+};
