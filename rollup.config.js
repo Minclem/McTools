@@ -39,9 +39,12 @@ const Configer = {
     plugins: [
         nodeResolve(),
         rollupEslint({
-            exclude: 'node_modules/**'
+            exclude: [ 'node_modules/**', '*/**/__tests__/' ]
         }),
         babel({
+            plugins: [
+                'external-helpers'
+            ],
             exclude: 'node_modules/**'
         }),
         json(),

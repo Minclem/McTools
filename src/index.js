@@ -145,7 +145,11 @@ function isFn (fn) {
  */
 
 function isObj (obj) {
-    return obj && typeof obj === 'object' ? true : false;
+    if (obj) {
+        return (typeof obj === 'object');
+    }
+    
+    return false;
 }
 
 /**
@@ -549,8 +553,37 @@ function CanvasResize (options) {
     };
 }
 
+/**
+ * 获取链接参数
+ * @param { String }  fileId    要获取的字段名
+ * @returns {string}
+ */
+function getSearch (fileId) {
+    let search = location.search;
+    let hash = location.hash;
+    let searchObj = {};
 
-export default {
+    if (!search &&
+        hash &&
+        hash.indexOf('?') &&
+        hash.indexOf('?') < hash.length
+    ) {
+        search = hash.substr(hash.indexOf('?'));
+    }
+
+    search = search.substr(1).split('&');
+
+    for (let i = 0, len = search.length; i < len; i++) {
+        let searchItem = search[i].split('=');
+
+        searchObj[searchItem[0]] = searchItem[1];
+    }
+
+    return searchObj[fileId];
+}
+
+
+module.exports = {
     getType,
     cleanSpaceModel,
     isInt,
@@ -581,5 +614,6 @@ export default {
     getFileExt,
     assign,
     extend,
-    CanvasResize
+    CanvasResize,
+    getSearch,
 };
