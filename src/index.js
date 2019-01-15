@@ -582,6 +582,27 @@ function getSearch (fileId) {
     return searchObj[fileId];
 }
 
+/**
+ * 页面滚动监听
+ */
+
+function watchScroll (config = {}) {
+    const { scrollEnd, scroll } = config;
+
+    window.onscroll = function () {
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        const isEnd = (scrollTop + document.body.clientHeight === document.body.scrollHeight);
+
+        if (typeof scroll === 'function') {
+            scroll(scrollTop);
+        }
+
+        if (isEnd && typeof scrollEnd === 'function') {
+            scrollEnd(scrollTop);
+        }
+    };
+}
+
 
 module.exports = {
     getType,
@@ -616,4 +637,5 @@ module.exports = {
     extend,
     CanvasResize,
     getSearch,
+    watchScroll,
 };
