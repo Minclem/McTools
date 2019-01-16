@@ -603,6 +603,23 @@ function watchScroll (config = {}) {
     };
 }
 
+function memoize (fn, resolver) {
+    function memorized (key) {
+        let cache = memorized.cache;
+        let cacheKey = resolver ? resolver.apply(this, arguments) : key;
+
+        if (!cache.has(cacheKey)) {
+            cache.set(cacheKey, fn.apply(this, arguments));
+        }
+
+        return cache.get(cacheKey);
+    };
+
+    memorized.cache = new Map;
+
+    return memorized;
+};
+
 
 module.exports = {
     getType,
@@ -638,4 +655,5 @@ module.exports = {
     CanvasResize,
     getSearch,
     watchScroll,
+    memoize,
 };
