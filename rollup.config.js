@@ -32,9 +32,9 @@ function rollupEslint(options) {
 const Configer = {
     input: 'src/index.js',
     output: {
-        file: 'dist/McTools.min.js',
+        file: 'dist/mctools.min.js',
         format: 'umd',
-        name: 'McTools'
+        name: 'mctools'
     },
     plugins: [
         nodeResolve(),

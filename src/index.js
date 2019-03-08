@@ -613,12 +613,12 @@ function memoize (fn, resolver) {
         }
 
         return cache.get(cacheKey);
-    };
+    }
 
     memorized.cache = new Map;
 
     return memorized;
-};
+}
 
 
 module.exports = {
