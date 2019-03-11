@@ -32,5 +32,6 @@ declare interface McTools {
     CanvasResize: (options: any) => void,
     getSearch: (id: string) => string,
     watchScroll: (config: any) => void,
-    memoize: (fn: any, resolver: any) => any
+    memoize: (fn: any, resolver: any) => any,
+    thousandBitSegmentation: (n: number | string) => string,
 }

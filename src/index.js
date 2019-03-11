@@ -603,6 +603,12 @@ function watchScroll (config = {}) {
     };
 }
 
+/**
+ * 记忆
+ * @param fn
+ * @param resolver
+ * @returns {function(*): (V | undefined)}
+ */
 function memoize (fn, resolver) {
     function memorized (key) {
         let cache = memorized.cache;
@@ -620,6 +626,19 @@ function memoize (fn, resolver) {
     return memorized;
 }
 
+/**
+ * 千位分割
+ * @param n
+ * @returns {string}
+ */
+function thousandBitSegmentation (n) {
+    let str = String(n);
+    let reg = /\d{1,3}(?=(\d{3})+$)/g;
+
+    return str.replace(/^(\d+)((\.\d+)?)$/, function ($1, $2, $3) {
+        return $2.replace(reg, '$&,') + $3;
+    });
+}
 
 module.exports = {
     getType,
@@ -656,4 +675,5 @@ module.exports = {
     getSearch,
     watchScroll,
     memoize,
+    thousandBitSegmentation
 };
