@@ -327,12 +327,23 @@ function formatNum (n) {
  *      date：日期, 默认全部显示
  *      line: 时间线
  *      part: 间隔线
+ *      piece: 间隔线
  * @returns { String }  返回格式后的时间字符串
  */
 
 function formatDate (date, format) {
-    // 服务端返回的时间戳可能以秒的形式
-    if (date == null) return;
+    // 如果未传人参数则直接读取当前时间
+    if (date == null) {
+        date = new Date().getTime();
+    }
+
+    if (typeof date === 'object') {
+        if (isNaN(+date)) {
+            throw 'Parameter error';
+        } else {
+            date = +date;
+        }
+    }
 
     // 格式化可能存在的格式
     // [2018/06/19 15:40] [2018-06-19 15:40] [2018年06月19日 15:40]
@@ -352,6 +363,10 @@ function formatDate (date, format) {
     }
 
     date = parseInt(date.toString().length < 11 ? date * 1000 : date);
+
+    if (isNaN(date)) {
+        throw 'Parameter error';
+    }
 
     date = new Date(date);
 
@@ -410,6 +425,21 @@ function formatDate (date, format) {
 
             return Math.floor(time / 31536000) + '年前';
         }
+    }
+
+    if (format === 'piece') {
+        return {
+            y,
+            M,
+            d,
+            h,
+            m,
+            s,
+            date,
+            firstWeek: new Date(y, M - 1, 1).getDay(),
+            time: date.getTime(),
+            week: date.getDay()
+        };
     }
 
     return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s;
