@@ -147,13 +147,13 @@ function isFn (fn) {
  */
 
 function isObj (obj) {
-    return typeof obj === 'object'
+    return typeof obj === 'object';
 }
 
 /**
  * 是否为字符串
  *
- * @param  { String }    str
+ * @param  { String }   str
  * @return { Boolean }  bool
  */
 
