@@ -1,7 +1,7 @@
 /**
  * 获取数据类型
  *
- * @param  { Mixed }   obj
+ * @param  { any }     obj
  * @return { String }  dataType
  */
 
@@ -15,8 +15,8 @@ function getType (obj) {
 /**
  * 清理模块的空间
  *
- * @param  { Mixed }
- * @return { Mixed }    
+ * @param  { any } obj
+ * @return { any } obj
  */
 
 function cleanSpaceModel (obj) {
@@ -27,15 +27,17 @@ function cleanSpaceModel (obj) {
     }
 
     if (_type === 'Object') {
-        for (var key in obj) {
-            obj[key] = cleanSpaceModel(obj[key]);
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                obj[key] = cleanSpaceModel(obj[key]);
+            }
         }
 
         return obj;
     }
 
     if (_type === 'Array') {
-        for (var i = obj.length - 1; i >= 0; i--) {
+        for (let i = obj.length - 1; i >= 0; i--) {
             obj[i] = cleanSpaceModel(obj[i]);
         }
 
@@ -71,7 +73,7 @@ function isInt (n) {
 /**
  * 是否一般对象
  *
- * @param  { Mixed }   obj
+ * @param  { any }   obj
  * @return { Boolean } bool
  */
 
@@ -84,7 +86,7 @@ function isPlainObject (obj) {
 /**
  * 是否数组
  *
- * @param  { Mixed }   obj
+ * @param  { any }   obj
  * @return { Boolean } bool
  */
 
@@ -95,7 +97,7 @@ function isArray (obj) {
 /**
  * 是否定义
  *
- * @param  { Mixed }   o
+ * @param  { any }   o
  * @return { Boolean } bool
  */
 
@@ -106,7 +108,7 @@ function isUndefined (o) {
 /**
  * 是否数字
  *
- * @param  { Number, String }   n
+ * @param  { any }   n
  * @return { Boolean } bool
  */
 
@@ -117,8 +119,8 @@ function isNumber (n) {
 /**
  * 判断两个值是否不同
  *
- * @param  { Mixed }    a
- * @param  { Mixed }    b
+ * @param  { any }    a
+ * @param  { any }    b
  * @return { Boolean }  bool
  */
 
@@ -129,7 +131,7 @@ function isDiff (a, b) {
 /**
  * 是否为函数
  *
- * @param  { Mixed }    fn
+ * @param  { any }    fn
  * @return { Boolean }  bool
  */
 
@@ -140,16 +142,12 @@ function isFn (fn) {
 /**
  * 是否为对象（数组，对象）
  *
- * @param  { Mixed }    obj
+ * @param  { any }    obj
  * @return { Boolean }  bool
  */
 
 function isObj (obj) {
-    if (obj) {
-        return (typeof obj === 'object');
-    }
-    
-    return false;
+    return typeof obj === 'object'
 }
 
 /**
@@ -166,7 +164,7 @@ function isStr (str) {
 /**
  * 是否为邮箱
  *
- * @param  { Mixed }    str
+ * @param  { string }    str
  * @return { Boolean }  bool
  */
 function isEmail (str) {
@@ -255,8 +253,9 @@ function isIdCard (str) {
 
 /**
  * 内容重复
- *
- * @returns { String }  str 
+ * @param { string } str
+ * @param { number } n
+ * @returns { string }
  */
 
 function strRepeat (str, n) {
@@ -270,7 +269,7 @@ function strRepeat (str, n) {
     
     let _str = '';
 
-    for (var i = n - 1; i >= 0; i--) {
+    for (let i = n - 1; i >= 0; i--) {
         _str += str;
     }
     
@@ -279,7 +278,7 @@ function strRepeat (str, n) {
 
 /**
  * 手机号加密
- *
+ * @param { string } phone
  * @returns { String }  phone 
  */
 
@@ -296,8 +295,8 @@ function encodePhone (phone) {
 /**
  * 克隆
  *
- * @param  { Mixed }   obj
- * @return { Mixed }   obj
+ * @param  { any }   obj
+ * @return { any }   obj
  */
 
 function clone (obj) {
@@ -322,7 +321,7 @@ function formatNum (n) {
 /**
  * 日期格式化
  *
- * @param   { Number, Date Object } date 时间对象 或者 时间戳
+ * @param   { Number, Date } date 时间对象 或者 时间戳
  * @param   { String } format 返回的格式
  *      time: 时间
  *      date：日期, 默认全部显示
