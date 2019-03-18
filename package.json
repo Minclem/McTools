@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=devlepment rollup -cw",
     "lint": "eslint src --ext .js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "keywords": [
     "McTools",

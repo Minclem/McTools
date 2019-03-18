@@ -78,6 +78,9 @@ function isInt (n) {
  */
 
 function isPlainObject (obj) {
+    if (obj === null || obj === undefined) {
+        return false;
+    }
     return isObj(obj) &&
             !(obj !== null && obj === obj.window) &&
             Object.getPrototypeOf(obj) === Object.prototype;

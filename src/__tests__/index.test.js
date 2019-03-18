@@ -126,7 +126,7 @@ test('isObj', () => {
 
     expect(utils.isObj([])).toBe(true);
 
-    expect(utils.isObj(null)).toBe(false);
+    expect(utils.isObj(null)).toBe(true);
 
     expect(utils.isObj(() => {})).toBe(false);
 
@@ -225,4 +225,46 @@ test('isDiff', () => {
     expect(utils.isDiff(false, true)).toBe(true);
 
     expect(utils.isDiff(NaN, NaN)).toBe(false);
+});
+
+test('isEmail', () => {
+    expect(utils.isEmail('wmjxin@126.com')).toBe(true);
+    expect(utils.isEmail('wmjxin@.com')).toBe(false);
+    expect(utils.isEmail('wmjxin@@126.com')).toBe(false);
+    expect(utils.isEmail('wmjxin.com')).toBe(false);
+    expect(utils.isEmail('@.com')).toBe(false);
+    expect(utils.isEmail('@.126com')).toBe(false);
+    expect(utils.isEmail('')).toBe(false);
+    expect(utils.isEmail()).toBe(false);
+    expect(utils.isEmail({})).toBe(false);
+    expect(utils.isEmail(null)).toBe(false);
+    expect(utils.isEmail([])).toBe(false);
+    expect(utils.isEmail(NaN)).toBe(false);
+    expect(utils.isEmail(123)).toBe(false);
+});
+
+test('isUrl', () => {
+    expect(utils.isUrl()).toBe(false);
+    expect(utils.isUrl('2121212')).toBe(false);
+    expect(utils.isUrl('https://www.google.com/')).toBe(true);
+    expect(utils.isUrl('http://www.google.com/')).toBe(true);
+    expect(utils.isUrl('http://www.google.com/?a=212#a=212')).toBe(true);
+    expect(utils.isUrl({})).toBe(false);
+    expect(utils.isUrl([])).toBe(false);
+    expect(utils.isUrl('')).toBe(false);
+    expect(utils.isUrl(null)).toBe(false);
+});
+
+test('formatDate', () => {
+    expect(utils.formatDate('2018/06/19 15:40')).toEqual('2018-06-19 15:40:00');
+    expect(utils.formatDate('2018-06-19 15:40')).toEqual('2018-06-19 15:40:00');
+    expect(utils.formatDate('2018年06月19日 15:40')).toEqual('2018-06-19 15:40:00');
+    expect(utils.formatDate(new Date('2018-06-19 15:40:00'))).toBe('2018-06-19 15:40:00');
+    expect(utils.formatDate(+new Date('2018-06-19 15:40:00'))).toBe('2018-06-19 15:40:00');
+
+    expect(utils.formatDate('2018/06/19 15:40', 'time')).toBe('15:40:00');
+    expect(utils.formatDate('2018/06/19 15:40', 'date')).toBe('2018-06-19');
+    expect(utils.formatDate('2018/06/19 15:40', 'line')).toBe('06月19日');
+    expect(utils.formatDate('2018/06/19 15:40', 'part')).toBe('9个月前');
+    expect(utils.formatDate('2018/06/19 15:40', 'piece')).toEqual({"y":2018,"M":"06","d":19,"h":15,"m":40,"s":"00","date": new Date('2018/06/19 15:40'),"firstWeek":5,"time":1529394000000,"week":2});
 });
