@@ -30,7 +30,8 @@
 	    date：日期, 默认全部显示
         line: 时间线
         part: 间隔线
-	@returns { string }
+        piece: 时间对象
+	@returns { string | object}
 	
 ##### getObjectURL : 获取文件路径
 	@param { file }
@@ -83,6 +84,11 @@
 ##### thousandBitSegmentation : 千位分割
 	@param { string }
 	@returns { string }
+	
+#### urlSplicing：链接参数拼接
+	 @param { string }
+     @param { object }
+     @returns { string }
     
 ##### isIe89: 是否为ie8/9
 	@returns { boolean }

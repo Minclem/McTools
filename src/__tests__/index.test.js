@@ -268,3 +268,14 @@ test('formatDate', () => {
     expect(utils.formatDate('2018/06/19 15:40', 'part')).toBe('9个月前');
     expect(utils.formatDate('2018/06/19 15:40', 'piece')).toEqual({"y":2018,"M":"06","d":19,"h":15,"m":40,"s":"00","date": new Date('2018/06/19 15:40'),"firstWeek":5,"time":1529394000000,"week":2});
 });
+
+test('urlSplicing', () => {
+    expect(utils.urlSplicing('http://xxxxx.com?sd=1#?', { a: 2 })).toEqual('http://xxxxx.com?sd=1&a=2#?');
+    expect(utils.urlSplicing('http://xxxxx.com?#', { a: 2 })).toEqual('http://xxxxx.com?a=2#');
+    expect(utils.urlSplicing('http://xxxxx.com#?', { a: 2 })).toEqual('http://xxxxx.com#?a=2');
+    expect(utils.urlSplicing('http://xxxxx.com', { a: 2 })).toEqual('http://xxxxx.com?a=2');
+    expect(utils.urlSplicing('http://xxxxx.com')).toEqual('http://xxxxx.com');
+    expect(utils.urlSplicing('http://xxxxx.com', { a:  'http://xxxxx.com'})).toEqual('http://xxxxx.com?a=http%3A%2F%2Fxxxxx.com');
+    expect(utils.urlSplicing('', { a: 'http://xxxxx.com'})).toEqual('?a=http%3A%2F%2Fxxxxx.com');
+    expect(utils.urlSplicing(null, { a: 'http://xxxxx.com'})).toEqual('?a=http%3A%2F%2Fxxxxx.com');
+});

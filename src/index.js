@@ -330,7 +330,7 @@ function formatNum (n) {
  *      date：日期, 默认全部显示
  *      line: 时间线
  *      part: 间隔线
- *      piece: 间隔线
+ *      piece: 时间对象
  * @returns { String }  返回格式后的时间字符串
  */
 
@@ -672,6 +672,64 @@ function thousandBitSegmentation (n) {
     });
 }
 
+/**
+ * 链接参数拼接
+ * @param { string } url
+ * @param { object } data
+ * @returns { string } url
+ */
+function urlSplicing (url, data) {
+    let queryArray = [];
+
+    if (url === null || url === undefined) {
+        url = '';
+    }
+
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            let val = data[key];
+
+            queryArray.push(`${key}=${
+                isUrl(val) ? encodeURIComponent(val) : val
+            }`);
+        }
+    }
+
+    if (queryArray.length === 0) return url;
+
+    const queryString = queryArray.join('&');
+
+    if (/[#?]/.test(url)) {
+        const q = url.indexOf('#');
+        const s = url.indexOf('?');
+        const hasAll = q !== -1 && s !== -1;
+
+        if (hasAll && q > s) {
+            return url.substr(0, q) + (q - s > 2 ? '&' : '') + queryString + url.substr(q);
+        }
+
+        if (hasAll && q < s || q === -1) {
+            return _splicing(s, url, queryString);
+        }
+    }
+
+    return `${url}?${queryString}`;
+}
+
+/**
+ * 参数拼接
+ * @param idx
+ * @param str
+ * @param query
+ * @returns {*}
+ * @private
+ */
+function _splicing (idx, str, query) {
+    const character = idx !== str.length - 1 ? '&' : '';
+
+    return `${str}${character}${query}`;
+}
+
 module.exports = {
     getType,
     cleanSpaceModel,
@@ -707,5 +765,6 @@ module.exports = {
     getSearch,
     watchScroll,
     memoize,
-    thousandBitSegmentation
+    thousandBitSegmentation,
+    urlSplicing
 };

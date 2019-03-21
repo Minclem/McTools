@@ -1,3 +1,7 @@
+interface queryData {
+    [propName: string]: any
+}
+
 declare interface McTools {
     getType: (o: any) => string,
     cleanSpaceModel: (o: any) => any,
@@ -24,7 +28,7 @@ declare interface McTools {
     encodePhone: (n: number | string) => string,
     clone: (o: object) => object,
     formatNum: (n: number | string) => string,
-    formatDate: (date: any, format: string) => string,
+    formatDate: (date: any, format: string) => any,
     getObjectURL: (o: any) => string,
     getFileExt: (o: any) => string,
     assign: (target: object, ...sources: any[]) => string,
@@ -34,4 +38,5 @@ declare interface McTools {
     watchScroll: (config: any) => void,
     memoize: (fn: any, resolver: any) => any,
     thousandBitSegmentation: (n: number | string) => string,
+    urlSplicing: (url: string, data: queryData) => string
 }
