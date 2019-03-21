@@ -85,7 +85,7 @@
 	@param { string }
 	@returns { string }
 	
-#### urlSplicing：链接参数拼接
+##### urlSplicing：链接参数拼接
 	 @param { string }
      @param { object }
      @returns { string }
