@@ -1,6 +1,6 @@
 {
   "name": "mctools",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Common tool code set",
   "main": "dist/mctools.min.js",
   "scripts": {
