@@ -6,7 +6,11 @@ import babel from 'rollup-plugin-babel';
 import { createFilter } from 'rollup-pluginutils';
 import { CLIEngine } from 'eslint';
 
+// eslint-disable-next-line no-undef
+const isDEV = process.env.NODE_ENV === 'devlepment';
+
 function normalizePath(id) {
+    // eslint-disable-next-line no-undef
     return path.relative(process.cwd(), id).split(path.sep).join('/');
 }
 
@@ -26,7 +30,25 @@ function rollupEslint(options) {
             if (cli.isPathIgnored(file) || isExclude) return null;
             if (relt.results) console.error(cli.getFormatter('codeframe')(relt.results));
         }
-    }
+    };
+}
+
+const plugins = [
+    nodeResolve(),
+    rollupEslint({
+        exclude: ['node_modules/**', '*/**/__tests__/']
+    }),
+    babel({
+        plugins: [
+            'external-helpers'
+        ],
+        exclude: 'node_modules/**'
+    }),
+    json(),
+];
+
+if (!isDEV) {
+    plugins.push(uglify());
 }
 
 const Configer = {
@@ -36,20 +58,7 @@ const Configer = {
         format: 'umd',
         name: 'mctools'
     },
-    plugins: [
-        nodeResolve(),
-        rollupEslint({
-            exclude: [ 'node_modules/**', '*/**/__tests__/' ]
-        }),
-        babel({
-            plugins: [
-                'external-helpers'
-            ],
-            exclude: 'node_modules/**'
-        }),
-        json(),
-        uglify()
-    ]
+    plugins
 };
 
-export default Configer
+export default Configer;

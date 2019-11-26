@@ -1,3 +1,6 @@
+let version = '0.2.7';
+let ua = window.navigator.userAgent.toLowerCase();
+
 /**
  * 获取数据类型
  *
@@ -57,7 +60,7 @@ function cleanSpaceModel (obj) {
  */
 
 function isIe89 () {
-    return /MSIE (8|9)\.0/.test(navigator.userAgent);
+    return /MSIE (8|9)\.0/.test(ua);
 }
 
 /**
@@ -201,7 +204,7 @@ function isPhone (str) {
  */
 
 function isIOS () {
-    return (/iPhone|iPad|iPod/).test(navigator.userAgent);
+    return (/iPhone|iPad|iPod/).test(ua);
 }
 
 /**
@@ -211,7 +214,56 @@ function isIOS () {
  */
 
 function isAndroid () {
-    return (/Android/).test(navigator.userAgent);
+    return (/Android/).test(ua);
+}
+
+/**
+ * 判断是否为移动端
+ *
+ * @returns { Boolean }  boolean
+ */
+
+function isMobile () {
+    return /(iPhone|iPad|iPod|iOS|Android|adr|Windows Phone|SymbianOS)/gi.test(ua);
+}
+
+/**
+ * 判断是否为微博
+ *
+ * @returns { Boolean }  boolean
+ */
+
+function isWeibo () {
+    return /(weibo)/gi.test(ua);
+}
+
+/**
+ * 判断是否为微信
+ *
+ * @returns { Boolean }  boolean
+ */
+
+function isWeChat () {
+    return /micromessenger/gi.test(ua);
+}
+
+/**
+ * 判断是否为QQ
+ *
+ * @returns { Boolean }  boolean
+ */
+
+function isQQ () {
+    return /qq\//gi.test(ua);
+}
+
+/**
+ * 判断是否为QQ空间
+ *
+ * @returns { Boolean }  boolean
+ */
+function isQzone () {
+    return /qzone\//gi.test(ua);
 }
 
 /**
@@ -730,7 +782,9 @@ function _splicing (idx, str, query) {
     return `${str}${character}${query}`;
 }
 
-module.exports = {
+let McTools = {
+    version,
+    ua,
     getType,
     cleanSpaceModel,
     isInt,
@@ -748,6 +802,11 @@ module.exports = {
     isUrl,
     isIOS,
     isAndroid,
+    isMobile,
+    isWeibo,
+    isWeChat,
+    isQQ,
+    isQzone,
     isChinese,
     isEnglish,
     isPassport,
@@ -768,3 +827,9 @@ module.exports = {
     thousandBitSegmentation,
     urlSplicing
 };
+
+if (window.McTools === null || window.McTools === void 0) {
+    window.McTools = McTools;
+}
+
+export default McTools;

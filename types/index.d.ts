@@ -3,6 +3,8 @@ interface queryData {
 }
 
 declare interface McTools {
+    version: string,
+    ua: string,
     getType: (o: any) => string,
     cleanSpaceModel: (o: any) => any,
     isInt: (n: any) => boolean,
@@ -20,6 +22,11 @@ declare interface McTools {
     isUrl: (o: any) => boolean,
     isIOS: () => boolean,
     isAndroid: () => boolean,
+    isMobile: () => boolean,
+    isWeibo: () => boolean,
+    isWeChat: () => boolean,
+    isQQ: () => boolean,
+    isQzone: () => boolean,
     isChinese: (o: any) => boolean,
     isEnglish: (o: any) => boolean,
     isPassport: (o: any) => boolean,
