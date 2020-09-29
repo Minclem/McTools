@@ -31,7 +31,7 @@
     "eslint": "^4.17.0",
     "eslint-plugin-import": "^2.18.2",
     "jest": "^23.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "rollup": "^0.55.3",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-eslint": "^4.0.0",
