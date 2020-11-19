@@ -265,7 +265,7 @@ test('formatDate', () => {
     expect(utils.formatDate('2018/06/19 15:40', 'time')).toBe('15:40:00');
     expect(utils.formatDate('2018/06/19 15:40', 'date')).toBe('2018-06-19');
     expect(utils.formatDate('2018/06/19 15:40', 'line')).toBe('2018年06月19日');
-    expect(utils.formatDate('2018/06/19 15:40', 'part')).toBe('1年前');
+    expect(utils.formatDate('2018/06/19 15:40', 'part')).toBe((new Date().getFullYear() - 2018) + '年前');
     expect(utils.formatDate('2018/06/19 15:40', 'piece')).toEqual({"y":2018,"M":"06","d":19,"h":15,"m":40,"s":"00","date": new Date('2018/06/19 15:40'),"firstWeek":5,"time":1529394000000,"week":2});
 });
 
